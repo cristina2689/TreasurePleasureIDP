@@ -1,7 +1,7 @@
 # TreasurePleasureIDP
-This repository hosts code for the augmented reality Android application
-TreasurePleasure.
-Mentor: TODO
+This repository hosts code for the augmented reality
+Android application TreasurePleasure.
+Mentor: *TODO
 
 Roles Assigned:
    * worker TODO
