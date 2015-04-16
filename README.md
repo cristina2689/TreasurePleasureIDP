@@ -1,9 +1,9 @@
-# TreasurePleasureIDP
+TreasurePleasureIDP
 This repository hosts code for the augmented reality
 Android application TreasurePleasure.
-Mentor: *TODO
+
+Mentor: Vlad Dragoi
 
 Roles Assigned:
-   * worker TODO
-   * driver TODO
-
+   * worker Cristina Georgiana Opriceana
+   * driver Cristina- Ioana Brinza
