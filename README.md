@@ -1,6 +1,6 @@
-# TreasurePleasureIDP
-This repository hosts code for the augmented reality Android application
-TreasurePleasure.
+TreasurePleasureIDP
+This repository hosts code for the augmented reality
+Android application TreasurePleasure.
 
 Mentor: Vlad Dragoi
 

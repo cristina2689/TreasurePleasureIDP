@@ -27,6 +27,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".JoinGameActivity"
+            android:label="@string/title_activity_join_game" >
+        </activity>
+        <activity
+            android:name=".AddGameActivity"
+            android:label="@string/title_activity_add_game" >
             android:name="org.project.garbage.UploadFileActivity"
             android:label="@string/title_activity_upload_file"
             android:parentActivityName=".MainActivity" >

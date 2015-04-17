@@ -6,11 +6,26 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/stars"
     tools:context="org.project.treasurepleasure.MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/JoinGame"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignLeft="@+id/addGame"
+        android:layout_below="@+id/addGame"
+        android:text="Join Game"
+        android:onClick="joinGame" />
+
+    <Button
+        android:id="@+id/addGame"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="115dp"
+        android:text="Add New Game"
+        android:onClick="addGame" />
 
 </RelativeLayout>
