@@ -8,8 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity { 
 
+	public static String USER_ID = "123456";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,8 +34,8 @@ public class MainActivity extends ActionBarActivity {
 
 		getMenuInflater().inflate(R.menu.main, menu);
 
-		Intent intent = new Intent(this, UploadFileActivity.class);
-		startActivity(intent);
+//		Intent intent = new Intent(this, UploadFileActivity.class);
+//		startActivity(intent);
  
 		return true;
 	}

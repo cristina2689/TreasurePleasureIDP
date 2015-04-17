@@ -74,7 +74,6 @@ public class UploadFileActivity extends ActionBarActivity {
 				new Thread(new Runnable() {
 					public void run() {
 						uploadPhoto(selectedImagePath);
-
 					}
 				}).start();
 			}

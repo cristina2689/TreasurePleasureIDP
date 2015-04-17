@@ -350,7 +350,7 @@ int drawable stars 0x7f020039
 int drawable startgame 0x7f02003a
 int drawable wallman 0x7f02003b
 int drawable wallp 0x7f02003c
-int id JoinGame 0x7f090047
+int id JoinGame 0x7f090046
 int id action_bar 0x7f090031
 int id action_bar_activity_content 0x7f090003
 int id action_bar_container 0x7f090030
@@ -364,9 +364,10 @@ int id action_menu_presenter 0x7f090006
 int id action_mode_bar 0x7f09002e
 int id action_mode_bar_stub 0x7f09002d
 int id action_mode_close_button 0x7f090020
-int id action_settings 0x7f09004c
+int id action_settings 0x7f09004b
 int id activity_chooser_view_content 0x7f090021
-int id addGame 0x7f090048
+int id addGame 0x7f090047
+int id addGameNext 0x7f090045
 int id always 0x7f090014
 int id beginning 0x7f09001b
 int id checkbox 0x7f090029
@@ -405,10 +406,8 @@ int id search_mag_icon 0x7f090038
 int id search_plate 0x7f090039
 int id search_src_text 0x7f09003a
 int id search_voice_btn 0x7f09003e
-int id selectdate 0x7f090043
-int id selectdateview 0x7f090044
-int id selectenddate 0x7f090045
-int id selectenddateview 0x7f090046
+int id selectenddate 0x7f090044
+int id selectstartdate 0x7f090043
 int id shortcut 0x7f09002a
 int id showCustom 0x7f090010
 int id showHome 0x7f090011
@@ -421,9 +420,9 @@ int id title 0x7f090027
 int id treasurestory 0x7f090042
 int id treasurestorytitle 0x7f090040
 int id up 0x7f090001
-int id uploadFile 0x7f090049
-int id uploadFileButton 0x7f09004b
-int id uploadFileTextView 0x7f09004a
+int id uploadFile 0x7f090048
+int id uploadFileButton 0x7f09004a
+int id uploadFileTextView 0x7f090049
 int id useLogo 0x7f090013
 int id withText 0x7f090018
 int id wrap_content 0x7f090009
