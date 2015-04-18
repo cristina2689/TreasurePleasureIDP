@@ -1,35 +1,17 @@
 package org.project.treasurepleasure;
 
-import static org.project.treasurepleasure.Utilities.SERVER_URL;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
+import org.project.databaseutil.AddGameConnectDB;
+import org.project.databaseutil.ValidateNameDB;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -187,7 +169,8 @@ public class AddGameActivity extends ActionBarActivity {
 	public void addGameNext(View view) {
 		String title = ((EditText) findViewById(R.id.gametitle)).getText().toString();
 		String description = ((EditText) findViewById(R.id.treasurestory)).getText().toString();
-
+		String gameMaster = ((EditText) findViewById(R.id.gameMasterEditText)).getText().toString();
+		
 		if (startDate == null || endDate == null) {
 			final Calendar c = Calendar.getInstance();
 			mYear = c.get(Calendar.YEAR);
@@ -203,118 +186,10 @@ public class AddGameActivity extends ActionBarActivity {
 			endDate = new StringBuilder().append(mYear).append("-").append(mMonth + 1).append("-").append(mDay).append(" ");
 		}
 
-		new AddGameConnectDB().execute(title, description, startDate.toString(), endDate.toString(), MainActivity.USER_ID);
+		new ValidateNameDB(this, AddGameActivity.this).execute(gameMaster);
+		
+		// TODO: move to a final page
+		new AddGameConnectDB(this, AddGameActivity.this).execute(title, description, startDate.toString(), endDate.toString(), gameMaster);
 	}
-
-	// communication with DB
-	private ProgressDialog progressMessage;
-
-	class AddGameConnectDB extends AsyncTask<String, Void, String> {
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			progressMessage = new ProgressDialog(AddGameActivity.this);
-			progressMessage.setMessage("Loading ...");
-			progressMessage.setIndeterminate(false);
-			progressMessage.setCancelable(false);
-			progressMessage.show();
-		}
-
-		@Override
-		protected String doInBackground(String... params) {
-			String result = "";
-			String url = SERVER_URL + "addGame.php";
-			HttpClient httpClient = new DefaultHttpClient();
-			HttpResponse httpResponse;
-			InputStream is = null;
-
-			try {
-				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
-				nameValuePairs.add(new BasicNameValuePair("title", params[0]));
-				nameValuePairs.add(new BasicNameValuePair("description", params[1]));
-				nameValuePairs.add(new BasicNameValuePair("start_date", params[2]));
-				nameValuePairs.add(new BasicNameValuePair("end_date", params[3]));
-				nameValuePairs.add(new BasicNameValuePair("user_id", params[4]));
-
-				HttpPost httpPost = new HttpPost(url);
-				httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-				httpResponse = httpClient.execute(httpPost);
-
-				// check response
-				if (httpResponse != null) {
-					is = httpResponse.getEntity().getContent();
-					BufferedReader br = new BufferedReader(new InputStreamReader(is));
-					StringBuilder sb = new StringBuilder();
-					String line = "";
-
-					while ((line = br.readLine()) != null) {
-						sb.append(line + "\n");
-					}
-
-					is.close();
-					result = sb.toString();
-
-					if (result.startsWith("success")) {
-						runOnUiThread(new Runnable() {
-
-							@Override
-							public void run() {
-
-								 progressMessage.dismiss();
-
-								if (!isFinishing()) {
-									new AlertDialog.Builder(AddGameActivity.this)
-										.setTitle("New Game")
-										.setMessage("Game created successfully!")
-										.setCancelable(false)
-										.setPositiveButton("OK",
-													new OnClickListener() {
-														@Override
-														public void onClick(DialogInterface dialog, int which) {
-															dialog.dismiss();															
-														}
-													})
-										.create().show();
-								}
-							}
-						});
-					} else {
-						runOnUiThread(new Runnable() {
-
-							@Override
-							public void run() {
-
-								 progressMessage.dismiss();
-
-								if (!isFinishing()) {
-									new AlertDialog.Builder(AddGameActivity.this)
-										.setTitle("New Game")
-										.setMessage("Failed creating new game. Please try once again")
-										.setCancelable(false)
-										.setPositiveButton("OK", new OnClickListener() {
-											
-											@Override
-											public void onClick(DialogInterface dialog, int which) {	
-												dialog.dismiss();												
-											}
-										})
-										.create().show();
-								}
-							}
-						});
-					}
-				} else {
-					Log.e("POST:", "HTTP RESPONSE IS NULL");
-				}
-
-			} catch (Exception e) {
-				Log.e("ERROR:", e.getMessage());
-			}
-
-			return "SOLO";
-		}
-
-	}
+	
 }
