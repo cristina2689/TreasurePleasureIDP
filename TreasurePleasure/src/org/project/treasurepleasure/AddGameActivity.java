@@ -1,12 +1,18 @@
 package org.project.treasurepleasure;
 
+import static org.project.treasurepleasure.Utilities.AGA_DESCRIPTION;
+import static org.project.treasurepleasure.Utilities.AGA_END_DATE;
+import static org.project.treasurepleasure.Utilities.AGA_GAME_MASTER;
+import static org.project.treasurepleasure.Utilities.AGA_START_DATE;
+import static org.project.treasurepleasure.Utilities.AGA_TITLE;
+
 import java.util.Calendar;
 
-import org.project.databaseutil.AddGameConnectDB;
 import org.project.databaseutil.ValidateNameDB;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -186,10 +192,15 @@ public class AddGameActivity extends ActionBarActivity {
 
 		new ValidateNameDB(this, AddGameActivity.this).execute(gameMaster);
 		
+		// move to next page
+		Intent intent = new Intent(this, AddGameActivity2.class);
+		intent.putExtra(AGA_DESCRIPTION, description);
+		intent.putExtra(AGA_TITLE, title);
+		intent.putExtra(AGA_START_DATE, startDate.toString());
+		intent.putExtra(AGA_END_DATE, endDate.toString());
+		intent.putExtra(AGA_GAME_MASTER, gameMaster);
 		
-		
-		// TODO: move to a final page
-		new AddGameConnectDB(this, AddGameActivity.this).execute(title, description, startDate.toString(), endDate.toString(), gameMaster);
+		startActivity(intent);
 	}
 	
 }

@@ -13,19 +13,20 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
+        android:name="android.app.Application"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" 
-        android:name="android.app.Application">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>        
+        </activity>
         <activity
             android:name=".JoinGameActivity"
             android:label="@string/title_activity_join_game" >
@@ -40,6 +41,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.project.treasurepleasure.MainActivity" />
+        </activity>
+        <activity
+            android:name=".AddGameActivity2"
+            android:label="@string/title_activity_add_game_activity2" >
+        </activity>
+        <activity
+            android:name=".AddTreasure"
+            android:label="@string/title_activity_add_treasure" >
         </activity>
     </application>
 
