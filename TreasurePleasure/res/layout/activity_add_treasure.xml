@@ -68,8 +68,21 @@
         android:id="@+id/addTreasureImageTextView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="image_url" 
-        android:editable="false" />
+        android:editable="false"
+        android:text="image_url" />
+
+    <TextView
+        android:id="@+id/hintTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:text="Treasure hint" />
+
+    <EditText
+        android:id="@+id/hintEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10" />
 
     <Button
         android:id="@+id/okTreasure"

@@ -77,10 +77,6 @@ public class UploadFileActivity extends ActionBarActivity {
 					}
 				}).start();
 			}
-
-			// TextView textView = (TextView)
-			// findViewById(R.id.uploadFileTextView);
-			// textView.setText(getPath(selectedImageUri));
 		}
 	}
 

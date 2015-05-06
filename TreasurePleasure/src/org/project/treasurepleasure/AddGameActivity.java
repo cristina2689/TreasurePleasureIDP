@@ -151,25 +151,6 @@ public class AddGameActivity extends ActionBarActivity {
 		return null;
 	}
 
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.add_game, menu);
-//		return true;
-//	}
-//
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		// Handle action bar item clicks here. The action bar will
-//		// automatically handle clicks on the Home/Up button, so long
-//		// as you specify a parent activity in AndroidManifest.xml.
-//		int id = item.getItemId();
-//		if (id == R.id.action_settings) {
-//			return true;
-//		}
-//		return super.onOptionsItemSelected(item);
-//	}
-
 	public void addGameNext(View view) {
 		String title = ((EditText) findViewById(R.id.gametitle)).getText().toString();
 		String description = ((EditText) findViewById(R.id.treasurestory)).getText().toString();
@@ -190,17 +171,10 @@ public class AddGameActivity extends ActionBarActivity {
 			endDate = new StringBuilder().append(mYear).append("-").append(mMonth + 1).append("-").append(mDay).append(" ");
 		}
 
-		new ValidateNameDB(this, AddGameActivity.this).execute(gameMaster);
+		new ValidateNameDB(this, AddGameActivity.this)
+			.setParams(title, description, startDate.toString(), endDate.toString(), gameMaster)
+			.execute(gameMaster);
 		
-		// move to next page
-		Intent intent = new Intent(this, AddGameActivity2.class);
-		intent.putExtra(AGA_DESCRIPTION, description);
-		intent.putExtra(AGA_TITLE, title);
-		intent.putExtra(AGA_START_DATE, startDate.toString());
-		intent.putExtra(AGA_END_DATE, endDate.toString());
-		intent.putExtra(AGA_GAME_MASTER, gameMaster);
-		
-		startActivity(intent);
 	}
 	
 }

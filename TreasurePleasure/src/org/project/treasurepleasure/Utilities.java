@@ -12,5 +12,14 @@ public class Utilities {
 	public static final String AGA_GAME_MASTER = "org.treasure_pleasure.aga.game_master";
 	
 	public static final int INTEGER_VALUE = 12345;
-	public static final String GO_BACK = "org.treasure_pleasure.add_treasure";
+	public static final String GO_BACK_LATITUDE = "org.treasure_pleasure.add_treasure.latitude";
+	public static final String GO_BACK_LONGITUDE = "org.treasure_pleasure.add_treasure.longitude";
+	public static final String GO_BACK_TREASURE_URL = "org.treasure_pleasure.add_treasure.treasure_url";
+	public static final String GO_BACK_HINT = "org.treasure_pleasure.add_treasure.hint";
+	
+	public static boolean name_ok = true;
+	public static String game_title;
+	
+	public static int game_id;
+	public static int user_id;
 }
