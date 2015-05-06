@@ -17,7 +17,6 @@ public class Utilities {
 	public static final String GO_BACK_TREASURE_URL = "org.treasure_pleasure.add_treasure.treasure_url";
 	public static final String GO_BACK_HINT = "org.treasure_pleasure.add_treasure.hint";
 	
-	public static boolean name_ok = true;
 	public static String game_title;
 	
 	public static int game_id;

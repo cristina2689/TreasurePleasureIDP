@@ -27,7 +27,7 @@ import android.util.Log;
 
 @SuppressWarnings("deprecation")
 public class AddTreasureConnectDB extends AsyncTask<String, Void, String> {
-	private ProgressDialog progressMessage;
+//	private ProgressDialog progressMessage;
 	private Activity activity;
 	private Context context;
 
@@ -38,12 +38,12 @@ public class AddTreasureConnectDB extends AsyncTask<String, Void, String> {
 
 	@Override
 	protected void onPreExecute() {
-		super.onPreExecute();
-		progressMessage = new ProgressDialog(context);
-		progressMessage.setMessage("Loading ...");
-		progressMessage.setIndeterminate(false);
-		progressMessage.setCancelable(false);
-		progressMessage.show();
+//		super.onPreExecute();
+//		progressMessage = new ProgressDialog(context);
+//		progressMessage.setMessage("Loading ...");
+//		progressMessage.setIndeterminate(false);
+//		progressMessage.setCancelable(false);
+//		progressMessage.show();
 	}
 	
 	@Override
@@ -87,15 +87,15 @@ public class AddTreasureConnectDB extends AsyncTask<String, Void, String> {
 						@Override
 						public void run() {
 
-							progressMessage.dismiss();
+//							progressMessage.dismiss();
 
-							new AlertDialog.Builder(context).setTitle("Add Treasure").setMessage("Treasure added successfully!").setCancelable(false)
-									.setPositiveButton("OK", new OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											dialog.dismiss();
-										}
-									}).create().show();
+//							new AlertDialog.Builder(context).setTitle("Add Treasure").setMessage("Treasure added successfully!").setCancelable(false)
+//									.setPositiveButton("OK", new OnClickListener() {
+//										@Override
+//										public void onClick(DialogInterface dialog, int which) {
+//											dialog.dismiss();
+//										}
+//									}).create().show();
 
 						}
 					});
@@ -105,17 +105,17 @@ public class AddTreasureConnectDB extends AsyncTask<String, Void, String> {
 						@Override
 						public void run() {
 
-							progressMessage.dismiss();
+//							progressMessage.dismiss();
 
-							new AlertDialog.Builder(context)
-								.setTitle("Add Treasure")
-								.setMessage("Failed adding new treasure. Please try once again").setCancelable(false)
-								.setPositiveButton("OK", new OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										dialog.dismiss();
-									}
-								}).create().show();
+//							new AlertDialog.Builder(context)
+//								.setTitle("Add Treasure")
+//								.setMessage("Failed adding new treasure. Please try once again").setCancelable(false)
+//								.setPositiveButton("OK", new OnClickListener() {
+//									@Override
+//									public void onClick(DialogInterface dialog, int which) {
+//										dialog.dismiss();
+//									}
+//								}).create().show();
 
 						}
 					});
