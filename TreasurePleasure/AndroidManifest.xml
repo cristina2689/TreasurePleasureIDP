@@ -5,10 +5,15 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="17"
         android:targetSdkVersion="22" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
+        android:name="android.app.Application"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -29,6 +34,21 @@
         <activity
             android:name=".AddGameActivity"
             android:label="@string/title_activity_add_game" >
+        </activity>
+        <activity
+            android:name="org.project.garbage.UploadFileActivity"
+            android:label="@string/title_activity_upload_file" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.project.treasurepleasure.MainActivity" />
+        </activity>
+        <activity
+            android:name=".AddGameActivity2"
+            android:label="@string/title_activity_add_game_activity2" >
+        </activity>
+        <activity
+            android:name=".AddTreasure"
+            android:label="@string/title_activity_add_treasure" >
         </activity>
     </application>
 

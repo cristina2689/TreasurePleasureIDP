@@ -9,79 +9,79 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="org.project.treasurepleasure.AddGameActivity" >
 
-    <EditText
-        android:id="@+id/gametitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="77dp"
-        android:ems="10" />
-
     <TextView
-        android:id="@+id/treasurestorytitle"
+        android:id="@+id/gameMasterTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/gametitle"
-        android:layout_below="@+id/gametitle"
-        android:layout_marginTop="14dp"
-        android:text="Add treasure story:"
+        android:layout_marginBottom="16dp"
+        android:text="Game Master"
         android:textColor="#000000"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold" >
+
+        <requestFocus />
+    </TextView>
+
+    <EditText
+        android:id="@+id/gameMasterEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gameMasterTextView"
+        android:ems="10" >
+    </EditText>
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+        android:id="@+id/gameTitleTextView"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/gametitle"
-        android:layout_alignLeft="@+id/gametitle"
-        android:layout_marginBottom="52dp"
+        android:layout_below="@+id/gameMasterEditText"
         android:text="Insert New Game&apos;s Title:"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/gametitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gameTitleTextView"
+        android:ems="10" />
+    
+    <TextView
+        android:id="@+id/treasurestorytitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gametitle"
+        android:layout_marginBottom="16dp"
+        android:text="Add treasure story:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    
+    <EditText
         android:id="@+id/treasurestory"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/treasurestorytitle"
         android:layout_below="@+id/treasurestorytitle"
         android:ems="10" />
 
-    <Button
-        android:id="@+id/selectdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/treasurestory"
-        android:layout_below="@+id/treasurestory"
-        android:layout_marginTop="15dp"
-        android:text="Select start date:"
-        android:textColor="#000000" />
-
+    <!--
     <TextView
         android:id="@+id/selectdateview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/selectdate"
-        android:layout_below="@+id/selectdate"
+        android:layout_alignLeft="@+id/selectstartdate"
+        android:layout_below="@+id/selectstartdate"
         android:layout_marginLeft="14dp"
         android:layout_marginTop="18dp"
         android:text="##date##"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold" />
+    -->
 
-    <Button
-        android:id="@+id/selectenddate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/selectdate"
-        android:layout_below="@+id/selectdate"
-        android:text="Select start date:"
-        android:textColor="#000000" />
 
+    <!--
     <TextView
         android:id="@+id/selectenddateview"
         android:layout_width="wrap_content"
@@ -92,5 +92,37 @@
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold" />
+    -->
+
+   
+
+    <Button
+        android:id="@+id/selectstartdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/treasurestory"
+        android:text="Select start date"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/selectenddate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selectstartdate"
+        android:layout_marginBottom="28dp"
+        android:text="Select end date"
+        android:textColor="#000000" />
+
+     <Button
+         android:id="@+id/addGameNext"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_alignRight="@+id/treasurestory"
+         android:layout_marginBottom="40dp"
+         android:clickable="false"
+         android:onClick="addGameNext"
+         android:text="Next"
+         android:textColor="#505050" />
 
 </RelativeLayout>
