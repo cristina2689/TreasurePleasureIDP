@@ -1,6 +1,7 @@
 package org.project.treasurepleasure;
 
 import static org.project.treasurepleasure.Utilities.SERVER_URL;
+import static org.project.treasurepleasure.Utilities.JOIN_GAME;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,11 +15,13 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.project.databaseutil.Game;
-import org.project.databaseutil.User;
+import org.project.databaseutil.classes.Game;
+import org.project.databaseutil.classes.Treasure;
+import org.project.databaseutil.classes.User;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +37,8 @@ public class ViewGamesActivity extends Activity {
 	private List<User> users = new ArrayList<User>();
 	
 	private LinearLayout linearLayout;
+	
+	public List<Treasure> treasures = new ArrayList<Treasure>(); 
 	
 	private int[] buttons;
 
@@ -58,7 +63,9 @@ public class ViewGamesActivity extends Activity {
 				
 				Log.i("clicked button", "" + clickedButton);
 				
-				// TODO: take all treasures for this game ID
+				Intent intent = new Intent(ViewGamesActivity.this, JoinGameActivity.class);
+				intent.putExtra(JOIN_GAME, buttons[clickedButton]);
+				startActivity(intent);
 			}
 		};
 		

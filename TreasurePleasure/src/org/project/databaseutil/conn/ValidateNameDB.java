@@ -1,4 +1,4 @@
-package org.project.databaseutil;
+package org.project.databaseutil.conn;
 
 import static org.project.treasurepleasure.Utilities.SERVER_URL;
 
@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
-@SuppressWarnings("deprecation")
 public class ValidateNameDB extends AsyncTask<String, Void, String> {
 
 	private ProgressDialog progressMessage;

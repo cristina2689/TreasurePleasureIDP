@@ -1,18 +1,11 @@
 package org.project.treasurepleasure;
 
-import static org.project.treasurepleasure.Utilities.AGA_DESCRIPTION;
-import static org.project.treasurepleasure.Utilities.AGA_END_DATE;
-import static org.project.treasurepleasure.Utilities.AGA_GAME_MASTER;
-import static org.project.treasurepleasure.Utilities.AGA_START_DATE;
-import static org.project.treasurepleasure.Utilities.AGA_TITLE;
-
 import java.util.Calendar;
 
-import org.project.databaseutil.ValidateNameDB;
+import org.project.databaseutil.conn.ValidateNameDB;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;

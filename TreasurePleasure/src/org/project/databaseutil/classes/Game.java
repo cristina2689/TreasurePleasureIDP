@@ -1,4 +1,4 @@
-package org.project.databaseutil;
+package org.project.databaseutil.classes;
 
 import org.json.JSONException;
 import org.json.JSONObject;

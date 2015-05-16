@@ -18,7 +18,7 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.project.databaseutil.AddTreasureConnectDB;
+import org.project.databaseutil.conn.AddTreasureConnectDB;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,7 +36,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
-// TODO: integrate google maps
 /*
  * info pentru google maps:
  * - https://github.com/anca1ant/IOC_Project/blob/master/myCarpooling/res/layout/activity_passenger.xml
@@ -172,7 +171,6 @@ public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback
 
 	@Override
 	public void onMapReady(GoogleMap arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -1,4 +1,4 @@
-package org.project.databaseutil;
+package org.project.databaseutil.conn;
 
 import static org.project.treasurepleasure.Utilities.SERVER_URL;
 
