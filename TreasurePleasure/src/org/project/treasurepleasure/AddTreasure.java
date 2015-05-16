@@ -32,6 +32,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+
 // TODO: integrate google maps
 /*
  * info pentru google maps:
@@ -50,10 +54,11 @@ import android.widget.TextView;
  */
 
 @SuppressWarnings("deprecation")
-public class AddTreasure extends ActionBarActivity {
+public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback {
 
 	double latitude = 45.46363, longitude = 54.43636;
 	String selectedImagePath;
+	private GoogleMap map;
 
 	private static final int SELECT_PHOTO = 100;
 
@@ -62,6 +67,9 @@ public class AddTreasure extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_treasure);
 
+		final MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+
+		mapFragment.getMapAsync(this);
 	}
 
 	public void addTreasure(View view) {
@@ -112,7 +120,7 @@ public class AddTreasure extends ActionBarActivity {
 	}
 
 	class UploadPhoto extends AsyncTask<String, Void, String> {
-		
+
 		@Override
 		protected String doInBackground(String... params) {
 			uploadPhoto(params[0]);
@@ -134,7 +142,7 @@ public class AddTreasure extends ActionBarActivity {
 			MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
 			entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-			entityBuilder.addTextBody("upload_directory", uploadDirectory);		
+			entityBuilder.addTextBody("upload_directory", uploadDirectory);
 			entityBuilder.addBinaryBody("uploaded_file", sourceFile, ContentType.create("image/jpeg"), uploadFileName);
 
 			HttpEntity entity = entityBuilder.build();
@@ -142,7 +150,7 @@ public class AddTreasure extends ActionBarActivity {
 			HttpResponse response = httpClient.execute(httpPost);
 			HttpEntity httpEntity = response.getEntity();
 			result = EntityUtils.toString(httpEntity);
-			
+
 			android.util.Log.i("result", result);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -160,6 +168,12 @@ public class AddTreasure extends ActionBarActivity {
 		imagePath = cursor.getString(column_index);
 
 		return imagePath;
+	}
+
+	@Override
+	public void onMapReady(GoogleMap arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
