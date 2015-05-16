@@ -20,11 +20,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-<!--     <uses-feature -->
-<!--         android:glEsVersion="0x00020000" -->
-<!--         android:required="true" > -->
-<!--     </uses-feature> -->
-
     <application
         android:name="android.app.Application"
         android:allowBackup="true"
@@ -71,6 +66,11 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCeIdAj1ruOuX5We6jdDnw9yEd4wEdY4oc" />
+
+        <activity
+            android:name=".ViewGamesActivity"
+            android:label="@string/title_activity_view_games" >
+        </activity>
     </application>
 
 </manifest>

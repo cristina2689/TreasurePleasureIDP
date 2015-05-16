@@ -16,7 +16,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	public void joinGame(View view) {
-		Intent intent = new Intent(this, JoinGameActivity.class);
+		Intent intent = new Intent(this, ViewGamesActivity.class);
 		startActivity(intent);
 	}
 
