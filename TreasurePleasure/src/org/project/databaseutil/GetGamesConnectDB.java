@@ -15,6 +15,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+// TODO: delete this class
+
 @SuppressWarnings("deprecation")
 public class GetGamesConnectDB extends AsyncTask<String, Void, String> {
 
