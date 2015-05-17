@@ -1,11 +1,11 @@
 package org.project.treasurepleasure;
 
-import static org.project.treasurepleasure.Utilities.GO_BACK_HINT;
-import static org.project.treasurepleasure.Utilities.GO_BACK_LATITUDE;
-import static org.project.treasurepleasure.Utilities.GO_BACK_LONGITUDE;
-import static org.project.treasurepleasure.Utilities.GO_BACK_TREASURE_URL;
-import static org.project.treasurepleasure.Utilities.UPLOAD_FILE_PATH;
-import static org.project.treasurepleasure.Utilities.game_id;
+import static org.project.treasurepleasure.Constants.GO_BACK_HINT;
+import static org.project.treasurepleasure.Constants.GO_BACK_LATITUDE;
+import static org.project.treasurepleasure.Constants.GO_BACK_LONGITUDE;
+import static org.project.treasurepleasure.Constants.GO_BACK_TREASURE_URL;
+import static org.project.treasurepleasure.Constants.UPLOAD_FILE_PATH;
+import static org.project.treasurepleasure.Constants.game_id;
 
 import java.io.File;
 
@@ -18,7 +18,7 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.project.databaseutil.AddTreasureConnectDB;
+import org.project.databaseutil.conn.AddTreasureConnectDB;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -32,7 +32,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-// TODO: integrate google maps
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+
 /*
  * info pentru google maps:
  * - https://github.com/anca1ant/IOC_Project/blob/master/myCarpooling/res/layout/activity_passenger.xml
@@ -50,10 +53,11 @@ import android.widget.TextView;
  */
 
 @SuppressWarnings("deprecation")
-public class AddTreasure extends ActionBarActivity {
+public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback {
 
 	double latitude = 45.46363, longitude = 54.43636;
 	String selectedImagePath;
+	private GoogleMap map;
 
 	private static final int SELECT_PHOTO = 100;
 
@@ -62,11 +66,14 @@ public class AddTreasure extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_treasure);
 
+		final MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+
+		mapFragment.getMapAsync(this);
 	}
 
 	public void addTreasure(View view) {
 		String hint = ((EditText) findViewById(R.id.hintEditText)).getText().toString();
-		String treasure_url = Utilities.SERVER_URL + Utilities.game_title + "_" + Utilities.game_id + "/" + selectedImagePath.substring(selectedImagePath.lastIndexOf('/') + 1);
+		String treasure_url = Constants.SERVER_URL + Constants.game_title + "_" + Constants.game_id + "/" + selectedImagePath.substring(selectedImagePath.lastIndexOf('/') + 1);
 
 		// add in DB
 		new AddTreasureConnectDB(this, AddTreasure.this).execute(String.valueOf(latitude), String.valueOf(longitude), treasure_url, String.valueOf(game_id), hint);
@@ -112,7 +119,7 @@ public class AddTreasure extends ActionBarActivity {
 	}
 
 	class UploadPhoto extends AsyncTask<String, Void, String> {
-		
+
 		@Override
 		protected String doInBackground(String... params) {
 			uploadPhoto(params[0]);
@@ -123,7 +130,7 @@ public class AddTreasure extends ActionBarActivity {
 
 	private void uploadPhoto(String toUploadFilePath) {
 		String uploadFileName = toUploadFilePath.substring(toUploadFilePath.lastIndexOf('/') + 1);
-		String uploadDirectory = Utilities.game_title + "_" + Utilities.game_id;
+		String uploadDirectory = Constants.game_title + "_" + Constants.game_id;
 		File sourceFile = new File(toUploadFilePath);
 		String result;
 
@@ -134,7 +141,7 @@ public class AddTreasure extends ActionBarActivity {
 			MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
 			entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-			entityBuilder.addTextBody("upload_directory", uploadDirectory);		
+			entityBuilder.addTextBody("upload_directory", uploadDirectory);
 			entityBuilder.addBinaryBody("uploaded_file", sourceFile, ContentType.create("image/jpeg"), uploadFileName);
 
 			HttpEntity entity = entityBuilder.build();
@@ -142,7 +149,7 @@ public class AddTreasure extends ActionBarActivity {
 			HttpResponse response = httpClient.execute(httpPost);
 			HttpEntity httpEntity = response.getEntity();
 			result = EntityUtils.toString(httpEntity);
-			
+
 			android.util.Log.i("result", result);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -160,6 +167,11 @@ public class AddTreasure extends ActionBarActivity {
 		imagePath = cursor.getString(column_index);
 
 		return imagePath;
+	}
+
+	@Override
+	public void onMapReady(GoogleMap arg0) {
+		
 	}
 
 }

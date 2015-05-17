@@ -9,5 +9,6 @@
     <string name="title_activity_upload_file">UploadFileActivity</string>
     <string name="title_activity_add_game_activity2">AddGameActivity2</string>
     <string name="title_activity_add_treasure">AddTreasure</string>
+    <string name="title_activity_view_games">ViewGamesActivity</string>
 
 </resources>
