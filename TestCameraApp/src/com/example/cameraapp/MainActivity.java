@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
+/* Test Class for Camera Activity and Main Activity */
 public class MainActivity extends ActionBarActivity {
 
 	public static boolean back;
@@ -15,7 +17,10 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 	
-		Intent intent = new Intent(this, CameraActivity.class);
+		// Test Location activity
+		Intent intent = new Intent(this, LocationActivity.class);
+		// Test Camera Activity
+		//Intent intent = new Intent(this, LocationActivity.class);
 		startActivity(intent);
 	}
 

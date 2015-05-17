@@ -18,8 +18,7 @@ public class Utils {
 	public static float width;
 	private static final double angle = 180;
 
-	/*
-	private static double getObjectOrientationAngle(LatLng point1, LatLng point2) {
+	private static double getObjectOrientationAngle(LatLong point1, LatLong point2) {
 		double x1, x2, y1, y2;
 		double val = 0;
 		x1 = point1.longitude;
@@ -33,7 +32,7 @@ public class Utils {
 		return val;
 	}
 
-	public static boolean canBeSeen(LatLng point1, LatLng point2) {
+	public static boolean canBeSeen(LatLong point1, LatLong point2) {
 		objectOrientationAngle = getObjectOrientationAngle(point1, point2);
 		if (orientationAngle > objectOrientationAngle) {
 			if (Math.abs(objectOrientationAngle - orientationAngle) > angle)
@@ -53,7 +52,7 @@ public class Utils {
 		return false;
 	}
 
-	public static boolean isNear(LatLng point) {
+	public static boolean isNear(LatLong point) {
 		Location treasureLocation = new Location("Treasure Location");
 		treasureLocation.setLatitude(point.latitude);
 		treasureLocation.setLongitude(point.longitude);
@@ -65,5 +64,4 @@ public class Utils {
 	public static float getXposition() {
 		return ((width * (float) differenceAngle) / (2 * (float) cameraViewAngle));
 	}
-	*/
 }
