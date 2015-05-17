@@ -17,33 +17,17 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
 import android.util.Log;
 
-@SuppressWarnings("deprecation")
 public class AddTreasureConnectDB extends AsyncTask<String, Void, String> {
-//	private ProgressDialog progressMessage;
 	private Activity activity;
 	private Context context;
 
 	public AddTreasureConnectDB(Activity activity, Context context) {
 		this.activity = activity;
 		this.context = context;
-	}
-
-	@Override
-	protected void onPreExecute() {
-//		super.onPreExecute();
-//		progressMessage = new ProgressDialog(context);
-//		progressMessage.setMessage("Loading ...");
-//		progressMessage.setIndeterminate(false);
-//		progressMessage.setCancelable(false);
-//		progressMessage.show();
 	}
 	
 	@Override
