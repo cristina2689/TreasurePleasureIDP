@@ -23,6 +23,11 @@ public class Treasure {
 		}
 	}
 
+	public String getDirectory() {
+		String[] urlComponents = treasureUrl.split("/");
+		return urlComponents[4];
+	}
+	
 	public double getLatitude() {
 		return latitude;
 	}
