@@ -133,7 +133,7 @@ public class ViewGamesActivity extends Activity {
 								e.printStackTrace();
 							}
 
-							buttons = new int[games.size()];
+							buttons = new int[games.size() + 1];
 							
 							// populate view with info from DB
 							for (int i = 0; i < games.size(); i++) {
@@ -160,7 +160,7 @@ public class ViewGamesActivity extends Activity {
 								button.setId(i + 1);
 								button.setOnClickListener(joinGameHandler);
 								
-								buttons[i] = game.getGameId();								
+								buttons[button.getId()] = game.getGameId();								
 								
 								linearLayout.addView(view);
 							}

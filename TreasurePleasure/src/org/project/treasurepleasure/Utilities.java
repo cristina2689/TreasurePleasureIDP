@@ -17,4 +17,5 @@ public class Utilities {
 	
 	public static int game_id;
 	public static int user_id;
+
 }

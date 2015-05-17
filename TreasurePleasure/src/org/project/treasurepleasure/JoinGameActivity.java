@@ -24,8 +24,7 @@ public class JoinGameActivity extends ActionBarActivity {
 		gameId = (Integer)getIntent().getExtras().get(JOIN_GAME);
 		
 		new GetTreasuresConnectDB(this, JoinGameActivity.this).execute("" + gameId);
-		
-		// TODO: download photos
+
 	}
 
 }

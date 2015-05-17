@@ -2,16 +2,21 @@ package org.project.databaseutil.conn;
 
 import static org.project.treasurepleasure.Utilities.SERVER_URL;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.util.List;
+import java.net.URL;
+import java.net.URLConnection;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.ByteArrayBuffer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.project.databaseutil.classes.Treasure;
@@ -75,14 +80,14 @@ public class GetTreasuresConnectDB extends AsyncTask<String, Void, Void> {
 
 			if (!treasuresFromDB.equals("null")) {
 				JSONArray ja = null;
-
+				File directory = null;
+				
 				try {
 					ja = new JSONArray(treasuresFromDB);
 					for (int i = 0; i < ja.length(); i++) {
 						Treasure treasure = new Treasure(ja.getJSONObject(i));
 						((JoinGameActivity) activity).treasures.add(treasure);
-
-						File directory = null;
+						
 						if (directoryName == null) {
 							directoryName = treasure.getDirectory();
 
@@ -115,23 +120,43 @@ public class GetTreasuresConnectDB extends AsyncTask<String, Void, Void> {
 		return null;
 	}
 
-	@Override
-	protected void onPostExecute(Void result) {
-		// after all treasures have been taken from db, download photos
-		List<Treasure> treasures = ((JoinGameActivity) activity).treasures;
-
-		// create folder for files
-		// String directory = treasures.get(0).getDirectory();
-
-	}
-
 	class DownloadPhoto extends AsyncTask<String, Void, Void> {
 
 		@Override
 		protected Void doInBackground(String... params) {
 			String directory = params[0];
-			String url = params[1];
+			String urlLocation = params[1];
+			String fileName = urlLocation.substring(urlLocation.lastIndexOf("/") + 1);
 
+			try {
+				URL url = new URL(urlLocation);
+				URLConnection ucon = url.openConnection();
+				 
+                /*
+                 * Define InputStreams to read from the URLConnection.
+                 */
+                InputStream is = ucon.getInputStream();
+                BufferedInputStream bis = new BufferedInputStream(is);
+
+                /*
+                 * Read bytes to the Buffer until there is nothing more to read(-1).
+                 */
+                ByteArrayBuffer baf = new ByteArrayBuffer(50);
+                int current = 0;
+                while ((current = bis.read()) != -1) {
+                        baf.append((byte) current);
+                }
+
+                /* Convert the Bytes read to a String. */
+                File file = new File(directory + "/" + fileName);
+                FileOutputStream fos = new FileOutputStream(file);
+                fos.write(baf.toByteArray());
+                fos.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			return null;
 		}
 
