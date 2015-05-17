@@ -1,6 +1,6 @@
 package org.project.databaseutil.conn;
 
-import static org.project.treasurepleasure.Utilities.SERVER_URL;
+import static org.project.treasurepleasure.Constants.SERVER_URL;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,7 +11,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.project.treasurepleasure.AddGameActivity2;
-import org.project.treasurepleasure.Utilities;
+import org.project.treasurepleasure.Constants;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -103,7 +103,7 @@ public class ValidateNameDB extends AsyncTask<String, Void, String> {
 						// add in DB
 						new AddGameConnectDB(activity, context).execute(title, description, startDate, endDate, gameMaster);
 
-						Utilities.game_title = title;
+						Constants.game_title = title;
 
 						// move to next page
 						Intent intent = new Intent(activity, AddGameActivity2.class);

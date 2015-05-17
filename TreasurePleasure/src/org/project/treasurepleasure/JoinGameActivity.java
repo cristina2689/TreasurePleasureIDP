@@ -1,6 +1,6 @@
 package org.project.treasurepleasure;
 
-import static org.project.treasurepleasure.Utilities.JOIN_GAME;
+import static org.project.treasurepleasure.Constants.JOIN_GAME;
 
 import java.util.ArrayList;
 import java.util.List;

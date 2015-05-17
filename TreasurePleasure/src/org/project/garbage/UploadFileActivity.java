@@ -1,6 +1,6 @@
 package org.project.garbage;
 
-import static org.project.treasurepleasure.Utilities.UPLOAD_FILE_PATH;
+import static org.project.treasurepleasure.Constants.UPLOAD_FILE_PATH;
 
 import java.io.DataOutputStream;
 import java.io.File;

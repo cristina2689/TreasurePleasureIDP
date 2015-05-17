@@ -1,6 +1,7 @@
 package org.project.databaseutil.conn;
 
-import static org.project.treasurepleasure.Utilities.SERVER_URL;
+import static org.project.treasurepleasure.Constants.SERVER_URL;
+import static org.project.treasurepleasure.Constants.GAME_DIR;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -92,7 +93,7 @@ public class GetTreasuresConnectDB extends AsyncTask<String, Void, Void> {
 							directoryName = treasure.getDirectory();
 
 							// create directory
-							directory = new File(Environment.getExternalStorageDirectory().toString() + "/treasure_pleasure/" + directoryName);
+							directory = new File(Environment.getExternalStorageDirectory().toString() + GAME_DIR + directoryName);
 							if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
 								directory.mkdirs();
 							}
@@ -109,7 +110,6 @@ public class GetTreasuresConnectDB extends AsyncTask<String, Void, Void> {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-
 			}
 
 			progressMessage.dismiss();

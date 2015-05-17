@@ -1,11 +1,11 @@
 package org.project.treasurepleasure;
 
-import static org.project.treasurepleasure.Utilities.GO_BACK_HINT;
-import static org.project.treasurepleasure.Utilities.GO_BACK_LATITUDE;
-import static org.project.treasurepleasure.Utilities.GO_BACK_LONGITUDE;
-import static org.project.treasurepleasure.Utilities.GO_BACK_TREASURE_URL;
-import static org.project.treasurepleasure.Utilities.UPLOAD_FILE_PATH;
-import static org.project.treasurepleasure.Utilities.game_id;
+import static org.project.treasurepleasure.Constants.GO_BACK_HINT;
+import static org.project.treasurepleasure.Constants.GO_BACK_LATITUDE;
+import static org.project.treasurepleasure.Constants.GO_BACK_LONGITUDE;
+import static org.project.treasurepleasure.Constants.GO_BACK_TREASURE_URL;
+import static org.project.treasurepleasure.Constants.UPLOAD_FILE_PATH;
+import static org.project.treasurepleasure.Constants.game_id;
 
 import java.io.File;
 
@@ -73,7 +73,7 @@ public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback
 
 	public void addTreasure(View view) {
 		String hint = ((EditText) findViewById(R.id.hintEditText)).getText().toString();
-		String treasure_url = Utilities.SERVER_URL + Utilities.game_title + "_" + Utilities.game_id + "/" + selectedImagePath.substring(selectedImagePath.lastIndexOf('/') + 1);
+		String treasure_url = Constants.SERVER_URL + Constants.game_title + "_" + Constants.game_id + "/" + selectedImagePath.substring(selectedImagePath.lastIndexOf('/') + 1);
 
 		// add in DB
 		new AddTreasureConnectDB(this, AddTreasure.this).execute(String.valueOf(latitude), String.valueOf(longitude), treasure_url, String.valueOf(game_id), hint);
@@ -130,7 +130,7 @@ public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback
 
 	private void uploadPhoto(String toUploadFilePath) {
 		String uploadFileName = toUploadFilePath.substring(toUploadFilePath.lastIndexOf('/') + 1);
-		String uploadDirectory = Utilities.game_title + "_" + Utilities.game_id;
+		String uploadDirectory = Constants.game_title + "_" + Constants.game_id;
 		File sourceFile = new File(toUploadFilePath);
 		String result;
 

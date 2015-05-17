@@ -1,6 +1,6 @@
 package org.project.databaseutil.conn;
 
-import static org.project.treasurepleasure.Utilities.SERVER_URL;
+import static org.project.treasurepleasure.Constants.SERVER_URL;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -15,7 +15,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.project.treasurepleasure.Utilities;
+import org.project.treasurepleasure.Constants;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -85,10 +85,10 @@ public class AddGameConnectDB extends AsyncTask<String, Void, String> {
 				if (!result.startsWith("error")) {
 					// take user_id and game_id
 					String[] results = result.split("_");
-					Utilities.user_id = Integer.parseInt(results[0]);
+					Constants.user_id = Integer.parseInt(results[0]);
 					
 					results = results[1].split("\n");
-					Utilities.game_id = Integer.parseInt(results[0]);
+					Constants.game_id = Integer.parseInt(results[0]);
 				}
 
 				if (!result.startsWith("error")) {

@@ -1,6 +1,6 @@
 package org.project.treasurepleasure;
 
-public class Utilities {
+public class Constants {
 
 	public static final String SERVER_URL = "http://simurg.site40.net/treasure_pleasure/";
 	public static final String UPLOAD_FILE_PATH = SERVER_URL + "uploadFile.php";
@@ -12,6 +12,8 @@ public class Utilities {
 	public static final String GO_BACK_HINT = "org.treasure_pleasure.add_treasure.hint";
 	
 	public static final String JOIN_GAME = "org.treasure_pleasure.join_game";
+	
+	public static final String GAME_DIR = "/treasure_pleasure/";
 	
 	public static String game_title;
 	

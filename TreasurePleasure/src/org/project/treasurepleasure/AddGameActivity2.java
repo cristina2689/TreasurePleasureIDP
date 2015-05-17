@@ -1,10 +1,10 @@
 package org.project.treasurepleasure;
 
-import static org.project.treasurepleasure.Utilities.GO_BACK_HINT;
-import static org.project.treasurepleasure.Utilities.GO_BACK_LATITUDE;
-import static org.project.treasurepleasure.Utilities.GO_BACK_LONGITUDE;
-import static org.project.treasurepleasure.Utilities.GO_BACK_TREASURE_URL;
-import static org.project.treasurepleasure.Utilities.INTEGER_VALUE;
+import static org.project.treasurepleasure.Constants.GO_BACK_HINT;
+import static org.project.treasurepleasure.Constants.GO_BACK_LATITUDE;
+import static org.project.treasurepleasure.Constants.GO_BACK_LONGITUDE;
+import static org.project.treasurepleasure.Constants.GO_BACK_TREASURE_URL;
+import static org.project.treasurepleasure.Constants.INTEGER_VALUE;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Intent;

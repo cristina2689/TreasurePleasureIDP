@@ -1,6 +1,6 @@
 package org.project.databaseutil.conn;
 
-import static org.project.treasurepleasure.Utilities.SERVER_URL;
+import static org.project.treasurepleasure.Constants.SERVER_URL;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
