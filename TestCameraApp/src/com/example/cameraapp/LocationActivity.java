@@ -26,7 +26,7 @@ public class LocationActivity extends Activity implements LocationListener {
 
 	public static TextView tex1; //for test
 	public static TextView tex2; // for test
-	public static LatLong hint;
+	public static LatLong hint;  // get from database
 	public static boolean back;
 	private LocationManager locationManager;
 	private Location testLocation;

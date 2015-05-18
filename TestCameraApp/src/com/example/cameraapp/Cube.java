@@ -1,8 +1,12 @@
 package com.example.cameraapp;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -11,6 +15,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.opengl.GLUtils;
 import android.util.Log;
@@ -160,21 +165,42 @@ class Cube {
 	 *            - The GL Context
 	 * @param context
 	 *            - The Activity context
+	 * @throws MalformedURLException 
 	 */
-	public void loadGLTexture(GL10 gl, Context context) {
+	public void loadGLTexture(GL10 gl, Context context) throws MalformedURLException {
 		Log.d("debug", "se apeleaza");
 		// Get the texture from the Android resource directory
-		InputStream is = context.getResources()
-				.openRawResource(R.drawable.ic_launcher);
+		
+		URL url = new URL("http://simurg. site40. net/treasure_pleasure/salut_119/Fotografie0761.jpg");
+		Bitmap bmp = null;
+		try {
+			bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		//imageView.setImageBitmap(bmp);
+		
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
+		bmp.compress(CompressFormat.PNG, 0 /*ignored for PNG*/, bos); 
+		byte[] bitmapdata = bos.toByteArray();
+		ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
+		
+		InputStream inputStream = bs;
+		
+		//InputStream is = context.getResources()
+		//		.openRawResource(R.drawable.ic_launcher);
+		
+		
 		Bitmap bitmap = null;
 		try {
 			// BitmapFactory is an Android graphics utility for images
-			bitmap = BitmapFactory.decodeStream(is);
+			bitmap = BitmapFactory.decodeStream(bs);
 		} finally {
 			// Always clear and close
 			try {
-				is.close();
-				is = null;
+				bs.close();
+				bs = null;
 			} catch (IOException e) {
 			}
 		}

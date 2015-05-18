@@ -1,9 +1,11 @@
 package com.example.cameraapp;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+
 
 //import com.google.android.gms.maps.model.LatLng;
 import android.app.Activity;
@@ -193,7 +195,12 @@ class GLClearRenderer implements Renderer {
 	}
 
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-		mCube.loadGLTexture(gl, this.context);
+		try {
+			mCube.loadGLTexture(gl, this.context);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 		gl.glClearDepthf(1.0f);
 		gl.glEnable(GL10.GL_DEPTH_TEST);

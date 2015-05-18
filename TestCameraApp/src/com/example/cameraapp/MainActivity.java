@@ -17,10 +17,11 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 	
-		// Test Location activity
-		Intent intent = new Intent(this, LocationActivity.class);
-		// Test Camera Activity
+		//Test Location activity
 		//Intent intent = new Intent(this, LocationActivity.class);
+		
+		//Test Camera Activity
+		Intent intent = new Intent(this, LocationActivity.class);
 		startActivity(intent);
 	}
 
