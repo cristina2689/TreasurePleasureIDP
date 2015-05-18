@@ -21,7 +21,7 @@ public class MainActivity extends ActionBarActivity {
 		//Intent intent = new Intent(this, LocationActivity.class);
 		
 		//Test Camera Activity
-		Intent intent = new Intent(this, LocationActivity.class);
+		Intent intent = new Intent(this, CameraActivity.class);
 		startActivity(intent);
 	}
 
