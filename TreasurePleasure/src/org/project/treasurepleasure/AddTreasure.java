@@ -8,6 +8,8 @@ import static org.project.treasurepleasure.Constants.UPLOAD_FILE_PATH;
 import static org.project.treasurepleasure.Constants.game_id;
 
 import java.io.File;
+import java.text.DecimalFormat;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -21,8 +23,14 @@ import org.apache.http.util.EntityUtils;
 import org.project.databaseutil.conn.AddTreasureConnectDB;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,10 +39,16 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 /*
  * info pentru google maps:
@@ -53,11 +67,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
  */
 
 @SuppressWarnings("deprecation")
-public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback {
+public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback, OnMapClickListener, LocationListener {
 
-	double latitude = 45.46363, longitude = 54.43636;
+	double latitude, longitude;
 	String selectedImagePath;
 	private GoogleMap map;
+	private LocationManager locationManager;
+	private Location testLocation;
 
 	private static final int SELECT_PHOTO = 100;
 
@@ -66,9 +82,42 @@ public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_treasure);
 
+		// Compute GPS Coordinates - Open GPS and get location
+
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+
+		if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			String data = "GPS is closed!";
+			Toast.makeText(getApplicationContext(), (String) data, Toast.LENGTH_LONG).show();
+			this.buildAlertMessageNoGps();
+		}
+		List<String> providers = locationManager.getProviders(true);
+
+		// The real coord handling happen in onLocationChanged(Location
+		// location)
+
+		for (int i = providers.size() - 1; i >= 0; i--) {
+			testLocation = locationManager.getLastKnownLocation(providers.get(i));
+			if (testLocation != null)
+				break;
+		}
+
+		// -----------------------------------------------------------
 		final MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+		map = mapFragment.getMap();
 
 		mapFragment.getMapAsync(this);
+		map.setOnMapClickListener(this);
+
+		if (map != null) {
+			LatLng zoomPosition = new LatLng(testLocation.getLatitude(), testLocation.getLongitude());
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(zoomPosition, 17));
+			map.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomPosition, 17));
+			map.setMyLocationEnabled(true);
+			map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+		}
+
 	}
 
 	public void addTreasure(View view) {
@@ -171,7 +220,63 @@ public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback
 
 	@Override
 	public void onMapReady(GoogleMap arg0) {
-		
+
 	}
 
+	Marker marker;
+
+	@Override
+	public void onMapClick(LatLng coord) {
+		if (marker != null) {
+			marker.remove();
+		}
+		marker = map.addMarker(new MarkerOptions().position(coord).draggable(true));
+		
+		latitude = coord.latitude;
+		longitude = coord.longitude;
+		
+		EditText latitudeText = (EditText) findViewById(R.id.latitudeEditText);
+		EditText longitudeText = (EditText) findViewById(R.id.longitudeEditText);
+		
+		latitudeText.setText("" + new DecimalFormat("##.#####").format(latitude));
+		longitudeText.setText("" + new DecimalFormat("##.#####").format(longitude));
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void buildAlertMessageNoGps() {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Your GPS is disabled, do you want to enable it?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			public void onClick(final DialogInterface dialog, final int id) {
+				startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+			}
+		}).setNegativeButton("No", new DialogInterface.OnClickListener() {
+			public void onClick(final DialogInterface dialog, final int id) {
+				dialog.cancel();
+			}
+		});
+		final AlertDialog alert = builder.create();
+		alert.show();
+	}
 }
