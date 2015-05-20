@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,26 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/stars"
-    tools:context="org.project.treasurepleasure.MainActivity" >
-
-    <Button
-        android:id="@+id/JoinGame"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/addGame"
-        android:layout_below="@+id/addGame"
-        android:text="Join Game"
-        android:onClick="joinGame" />
-
-    <Button
-        android:id="@+id/addGame"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="115dp"
-        android:text="Add New Game"
-        android:onClick="addGame" />
-
-</RelativeLayout>
+    tools:context="org.project.treasurepleasure.MainActivity" 
+    android:background="@drawable/screen1">
+    
+</LinearLayout>

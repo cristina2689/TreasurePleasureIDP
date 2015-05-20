@@ -5,6 +5,9 @@ import static org.project.treasurepleasure.Constants.GO_BACK_LATITUDE;
 import static org.project.treasurepleasure.Constants.GO_BACK_LONGITUDE;
 import static org.project.treasurepleasure.Constants.GO_BACK_TREASURE_URL;
 import static org.project.treasurepleasure.Constants.INTEGER_VALUE;
+
+import java.text.DecimalFormat;
+
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Intent;
@@ -69,7 +72,7 @@ public class AddGameActivity2 extends ActionBarActivity {
 				latitudeTV.setTypeface(null, Typeface.BOLD);
 
 				EditText latitudeET = new EditText(AddGameActivity2.this);
-				latitudeET.setText(latitude);
+				latitudeET.setText(new DecimalFormat("##.#####").format(latitude));
 				latitudeET.setEnabled(false);
 
 				ll1.addView(latitudeTV);
@@ -90,7 +93,7 @@ public class AddGameActivity2 extends ActionBarActivity {
 				longitudeTV.setTypeface(null, Typeface.BOLD);
 
 				EditText longitudeET = new EditText(AddGameActivity2.this);
-				longitudeET.setText(longitude);
+				longitudeET.setText(new DecimalFormat("##.#####").format(longitude));
 				longitudeET.setEnabled(false);
 
 				ll2.addView(longitudeTV);
@@ -120,7 +123,7 @@ public class AddGameActivity2 extends ActionBarActivity {
 	}
 	
 	public void addGameFinish(View view) {
-		Intent intent = new Intent(this, MainActivity.class);
+		Intent intent = new Intent(this, JoinAddActivity.class);
 		startActivity(intent);
 	}
 }

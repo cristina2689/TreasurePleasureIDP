@@ -2,6 +2,9 @@ package org.project.databaseutil.classes;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import static org.project.treasurepleasure.Constants.GAME_DIR;
+
+import android.os.Environment;
 
 public class Treasure {
 
@@ -26,6 +29,14 @@ public class Treasure {
 	public String getDirectory() {
 		String[] urlComponents = treasureUrl.split("/");
 		return urlComponents[4];
+	}
+	
+	public String getFileName() {
+		return treasureUrl.substring(treasureUrl.lastIndexOf("/") + 1);
+	}
+	
+	public String getFileLocation() {
+		return Environment.getExternalStorageDirectory() + GAME_DIR + getDirectory() + "/" + getFileName(); 
 	}
 	
 	public double getLatitude() {

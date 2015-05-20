@@ -5,39 +5,32 @@ import static org.project.treasurepleasure.Constants.GAME_DIR;
 import java.io.File;
 import java.io.IOException;
 
-import org.project.treasurepleasure.camera.CameraActivity;
-
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.ActionBarActivity;
-import android.view.View;
+import android.os.Handler;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-	}
-
-	public void joinGame(View view) {
-//		Intent intent = new Intent(this, ViewGamesActivity.class);
-//		startActivity(intent);
 		
-//		Intent intent = new Intent(this, LocationActivity.class);
-//		startActivity(intent);
-		
-		Intent intent = new Intent(this, CameraActivity.class);
-		startActivity(intent);
-		
-	}
+		Handler mHandler = new Handler();
+		mHandler.postDelayed(new Runnable() {
 
-	public void addGame(View view) {
-		Intent intent = new Intent(this, AddGameActivity.class);
-		startActivity(intent);
-	}
+		    @Override
+		    public void run() {
+		    	Intent intent = new Intent(MainActivity.this, JoinAddActivity.class);
+				startActivity(intent);
+		    }
 
+		}, 3000L);
+
+	}
+	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -55,5 +48,4 @@ public class MainActivity extends ActionBarActivity {
 			}
 		}
 	}
-
 }

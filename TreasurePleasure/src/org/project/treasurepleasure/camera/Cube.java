@@ -1,25 +1,27 @@
 package org.project.treasurepleasure.camera;
 
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import android.R;
+import org.project.treasurepleasure.JoinGameActivity;
+
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.opengl.GLUtils;
 import android.util.Log;
+
+import com.google.android.gms.maps.model.LatLng;
 
 class Cube {
 	private Context context;
@@ -130,9 +132,8 @@ class Cube {
 	 *            - The GL Context
 	 */
 	public void draw(GL10 gl) {
-		//boolean isSeen;
-		//isSeen = Utils.canBeSeen(new LatLng(Utils.userLocation.getLatitude(),
-		//		Utils.userLocation.getLongitude()), SearchActivity.hint);
+		Utils.isSeen = Utils.canBeSeen(new LatLong(Utils.userLocation.getLatitude(),
+				Utils.userLocation.getLongitude()), JoinGameActivity.hint);
 		
 		// Bind our only previously generated texture in this case
 		gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[0]);
@@ -189,9 +190,16 @@ class Cube {
 //		
 //		InputStream inputStream = bs;
 		
-		InputStream is = context.getResources()
-				.openRawResource(R.drawable.ic_menu_myplaces);
-		
+//		InputStream is = context.getResources()
+//				.openRawResource(R.drawable.ic_menu_myplaces);
+		File file = new File(CameraActivity.fileLocation);
+		InputStream is = null;
+		try {
+			is = new FileInputStream(file);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		Bitmap bitmap = null;
 		try {

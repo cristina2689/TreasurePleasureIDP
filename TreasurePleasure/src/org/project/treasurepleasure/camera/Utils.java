@@ -14,9 +14,10 @@ public class Utils {
 	/* difference between objectOrientationAngle and orientationAngle */
 	public static double differenceAngle;
 	public static Location userLocation;
-	public static float deltaDistance;
+	public static float deltaDistance = 2;
 	public static float width;
 	private static final double angle = 180;
+	public static boolean isSeen = false;
 
 	private static double getObjectOrientationAngle(LatLong point1, LatLong point2) {
 		double x1, x2, y1, y2;
@@ -59,7 +60,7 @@ public class Utils {
 		if (userLocation.distanceTo(treasureLocation) < deltaDistance)
 			return true;
 		return false;
-	}
+	} 
 
 	public static float getXposition() {
 		return ((width * (float) differenceAngle) / (2 * (float) cameraViewAngle));

@@ -1,7 +1,7 @@
 package org.project.databaseutil.conn;
 
-import static org.project.treasurepleasure.Constants.SERVER_URL;
 import static org.project.treasurepleasure.Constants.GAME_DIR;
+import static org.project.treasurepleasure.Constants.SERVER_URL;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -49,7 +49,12 @@ public class GetTreasuresConnectDB extends AsyncTask<String, Void, Void> {
 		progressMessage.setCancelable(false);
 		progressMessage.show();
 	}
-
+	
+	@Override
+	protected void onPostExecute(Void result) {
+		((JoinGameActivity) activity).flag = true; 
+	}
+	
 	String treasuresFromDB = "";
 	String directoryName = null;
 

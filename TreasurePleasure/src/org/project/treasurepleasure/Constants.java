@@ -14,6 +14,7 @@ public class Constants {
 	public static final String JOIN_GAME = "org.treasure_pleasure.join_game";
 	
 	public static final String GAME_DIR = "/treasure_pleasure/";
+	public static final String OPEN_CAMERA = "org.treasure_pleasure.open_camera";
 	
 	public static String game_title;
 	

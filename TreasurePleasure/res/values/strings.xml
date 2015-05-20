@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TreasurePleasure</string>
+    <string name="app_name">Treasure Pleasure</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_join_game">JoinGameActivity</string>
-    <string name="title_activity_add_game">AddGameActivity</string>
-    <string name="title_activity_upload_file">UploadFileActivity</string>
-    <string name="title_activity_add_game_activity2">AddGameActivity2</string>
-    <string name="title_activity_add_treasure">AddTreasure</string>
-    <string name="title_activity_view_games">ViewGamesActivity</string>
-
+    <string name="title_activity_join_game">Join Game</string>
+    <string name="title_activity_add_game">Add Game</string>
+    <string name="title_activity_add_game_activity2">Add Game</string>
+    <string name="title_activity_add_treasure">Add Treasure</string>
+    <string name="title_activity_view_games">ViewGames</string>
 </resources>

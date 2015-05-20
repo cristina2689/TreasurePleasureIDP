@@ -50,22 +50,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-/*
- * info pentru google maps:
- * - https://github.com/anca1ant/IOC_Project/blob/master/myCarpooling/res/layout/activity_passenger.xml
- * - https://github.com/anca1ant/IOC_Project/blob/master/myCarpooling/src/com/BARcode/mycarpooling/AdvancedOptions.java
- */
-
-/*
- * ma gandesc asa: o sa aiba o latitudine si o longitudine care ii vin de pe harta, 
- * o sa ii apara in casutele alea doua ce apar aici (daca nu apar cand citesti asta, vor aparea)
- * si o sa poata sa isi adauge poza pe care o vrea pentru comoara respectiva.
- * apoi o sa puna chestiile astea cu putExtra sa dea inapoi la AddGameActivity_2 care e parintele.
- * 
- * in momentul in care da click pe butonul de aici (addTreasure), o sa i se bage intai in baza de date comoara,
- * apoi o sa se intoarca la parinte sa adauge si alte comori.
- */
-
 @SuppressWarnings("deprecation")
 public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback, OnMapClickListener, LocationListener {
 
