@@ -13,6 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
+            android:textColor="#FFFFCC"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold" />
 
@@ -20,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10" 
+            android:textColor="#FFFFCC"
             android:paddingLeft="@dimen/activity_horizontal_margin">
         </TextView>
     </LinearLayout>
@@ -33,11 +35,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Game master"
+            android:textColor="#FFFFCC"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#FFFFCC"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:ems="10" >
         </TextView>
@@ -52,11 +56,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Description"
+            android:textColor="#FFFFCC"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#FFFFCC"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:ems="10" >
         </TextView>
@@ -71,12 +77,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Start date"
+            android:textColor="#FFFFCC"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/startDateTextView_fromDB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#FFFFCC"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:ems="10" >
         </TextView>
@@ -91,11 +99,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="End date"
+            android:textColor="#FFFFCC"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#FFFFCC"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:ems="10" >
         </TextView>

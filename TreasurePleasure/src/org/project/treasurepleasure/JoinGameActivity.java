@@ -2,6 +2,7 @@ package org.project.treasurepleasure;
 
 import static org.project.treasurepleasure.Constants.JOIN_GAME;
 import static org.project.treasurepleasure.Constants.OPEN_CAMERA;
+import static org.project.treasurepleasure.Constants.waitCube;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
+@SuppressWarnings("deprecation")
 public class JoinGameActivity extends Activity implements LocationListener, OnMapReadyCallback, OnMapClickListener {
 
 	public static TextView tex1; // for test
@@ -47,7 +49,6 @@ public class JoinGameActivity extends Activity implements LocationListener, OnMa
 	public static boolean back;
 	private LocationManager locationManager;
 	private Location testLocation;
-	private boolean isStarted;
 	private ProgressDialog progress;
 	private Preview prev;
 	private double thetaV;
@@ -62,7 +63,6 @@ public class JoinGameActivity extends Activity implements LocationListener, OnMa
 		private SurfaceHolder mHolder;
 		private Camera mCamera;
 
-		@SuppressWarnings("deprecation")
 		Preview(Context context) {
 			super(context);
 			mHolder = getHolder();
@@ -131,14 +131,10 @@ public class JoinGameActivity extends Activity implements LocationListener, OnMa
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_join_game);
 
-		/**********************************************************/
 		gameId = (Integer) getIntent().getExtras().get(JOIN_GAME);
 
 		new GetTreasuresConnectDB(this, JoinGameActivity.this).execute("" + gameId);
 
-		/**********************************************************/
-			
-		/**********************************************************/
 		progress = new ProgressDialog(this);
 		progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		progress.show();
@@ -173,14 +169,13 @@ public class JoinGameActivity extends Activity implements LocationListener, OnMa
 
 		if (map != null) {
 			LatLng zoomPosition = new LatLng(testLocation.getLatitude(), testLocation.getLongitude());
-			map.moveCamera(CameraUpdateFactory.newLatLngZoom(zoomPosition, 5));
-			map.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomPosition, 5));
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(zoomPosition, 10));
+			map.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomPosition, 10));
 			map.setMyLocationEnabled(true);
 			map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		}
 		
 		// --------------------------------------------------------------------------------
-		isStarted = false;
 		back = false;
 		prev = new Preview(this);
 	}
@@ -213,30 +208,34 @@ public class JoinGameActivity extends Activity implements LocationListener, OnMa
 
 		Utils.userLocation = location;
 
-		// if (tex1 != null && tex2 != null) {
-		// String text1 = "Latitude: " + location.getLatitude(); String text2 =
-		// "Longitude: " +
-		// location.getLongitude(); tex1.setText(text1); tex2.setText(text2);
-		// progress.dismiss();
-		// }
 		progress.dismiss();
 
-		if (Utils.userLocation != null && flag && treasures.size() != 0) {
+		if (Utils.userLocation != null && flag && !waitCube) {
 			for (Treasure treasure : treasures) {
 				hint = new LatLong(treasure.getLatitude(), treasure.getLongitude());
 				if (Utils.isNear(hint)) {
+					waitCube = true;
+					
 					Intent intent = new Intent(this, CameraActivity.class);
 					System.out.println("Started camera activity\n");
 					intent.putExtra(OPEN_CAMERA, treasure.getFileLocation());
 					Log.d("ok", "started camera activity");
 					startActivity(intent);
+					
+					treasures.remove(treasure);
+					break;
 				}
-
-				treasures.remove(treasure);
-				break;
+			}
+			
+			// if found all treasures, game over
+			if (treasures.size() == 0) {
+				Toast toast = Toast.makeText(getApplicationContext(), "You found all treasures!", Toast.LENGTH_LONG);
+				toast.show();
+				
+				finish();
 			}
 		}
-
+		
 	}
 
 	@Override
@@ -271,13 +270,9 @@ public class JoinGameActivity extends Activity implements LocationListener, OnMa
 
 	@Override
 	public void onMapClick(LatLng arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void onMapReady(GoogleMap arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 }

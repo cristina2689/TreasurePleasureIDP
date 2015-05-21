@@ -137,7 +137,7 @@ public class AddGameConnectDB extends AsyncTask<String, Void, String> {
 			Log.e("ERROR:", e.getMessage());
 		}
 
-		return "SOLO";
+		return "YOLO";
 	}
 
 }

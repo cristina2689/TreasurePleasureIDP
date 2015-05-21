@@ -2,6 +2,7 @@ package org.project.treasurepleasure.camera;
 
 
 import static org.project.treasurepleasure.Constants.OPEN_CAMERA;
+import static org.project.treasurepleasure.Constants.waitCube;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -9,8 +10,6 @@ import java.net.MalformedURLException;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-
-//import com.google.android.gms.maps.model.LatLng;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -34,9 +33,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 
+@SuppressWarnings("deprecation")
 public class CameraActivity extends Activity implements SensorEventListener {
 	private SensorManager sensorManager;
-	private Camera camera;
 	public static String fileLocation;
 
 	@Override
@@ -53,20 +52,13 @@ public class CameraActivity extends Activity implements SensorEventListener {
 		GLSurfaceView glView = new GLSurfaceView(this);
 		glView.setEGLConfigChooser(8, 8, 8, 8, 16, 0);
 		glView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
-		glView.setRenderer(new GLClearRenderer(this, CameraActivity.this));
+		glView.setRenderer(new GLClearRenderer(this));
 		setContentView(glView);
 		CameraView cameraView = new CameraView(this, CameraActivity.this);
 		addContentView(cameraView, new LayoutParams(LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT));
 
-		//ViewGroup.LayoutParams params = prev.getLayoutParams();
-		//params.width = 0;
-		//params.height = 0;
-		//prev.setLayoutParams(params);
-		// Compute camera angle
 		fileLocation = getIntent().getExtras().getString(OPEN_CAMERA);
-		
-		//hint = new LatLong(44.4361, 26.0484);
 	} 
 
 	@Override
@@ -83,7 +75,6 @@ public class CameraActivity extends Activity implements SensorEventListener {
 		super.onStop();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -96,27 +87,19 @@ public class CameraActivity extends Activity implements SensorEventListener {
 	public void onBackPressed() {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(
-				"You are veeery close. Are you sure you want to give up now?")
+				"Yeeey... you found one tresure!")
 				.setCancelable(false)
-				.setPositiveButton("I give up...",
+				.setPositiveButton("Well done :)",
 						new DialogInterface.OnClickListener() {
 							public void onClick(final DialogInterface dialog,
 									final int id) {
 								exit();
-							}
-						})
-				.setNegativeButton("No!",
-						new DialogInterface.OnClickListener() {
-							public void onClick(final DialogInterface dialog,
-									final int id) {
-								dialog.cancel();
 							}
 						});
 		final AlertDialog alert = builder.create();
 		alert.show();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		if (event.sensor.getType() == Sensor.TYPE_ORIENTATION) {
@@ -129,14 +112,14 @@ public class CameraActivity extends Activity implements SensorEventListener {
 	}
 
 	public void exit() {
-//		MainActivity.back = true;
+		waitCube = false;
 		sensorManager.unregisterListener(this);
 		finish();
-//		super.onBackPressed();
 	}
 }
 
 /*------------------------------------------------------------------------------------------------------------*/
+@SuppressWarnings("deprecation")
 class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 	private Camera camera;
 	private double thetaV;
@@ -144,7 +127,6 @@ class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 	private Activity act;
 	private SurfaceHolder mHolder;
 
-	@SuppressWarnings("deprecation")
 	public CameraView(Context context, Activity act) {
 		super(context);
 		mHolder = getHolder();
@@ -188,7 +170,6 @@ class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
 		Camera.Parameters p = camera.getParameters();
-//		p.setPreviewSize(width, height);
 		camera.setParameters(p);
 		try {
 			camera.setPreviewDisplay(holder);
@@ -210,11 +191,9 @@ class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 class GLClearRenderer implements Renderer {
 	private Context context;
 	private Cube mCube;
-	private Activity activity;
 	
 	/** Constructor to set the handed over context */
-	public GLClearRenderer(Context context, Activity activity) {
-		this.activity = activity;
+	public GLClearRenderer(Context context) {
 		this.context = context;
 		
 		mCube = new Cube(context);

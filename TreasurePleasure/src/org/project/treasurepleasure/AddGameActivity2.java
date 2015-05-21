@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -22,13 +23,14 @@ import android.widget.TextView;
 
 public class AddGameActivity2 extends ActionBarActivity {
 	String latitude, longitude, treasure_url, hint;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_game2);
 
 		ll = (LinearLayout) findViewById(R.id.addTreasureLinearLayout);
+		
 	}
 
 	public void addTreasure(View view) {
@@ -38,6 +40,86 @@ public class AddGameActivity2 extends ActionBarActivity {
 
 	private LinearLayout ll;
 
+	private void createDesign() {
+		final float scale = getResources().getDisplayMetrics().density;
+		int padding_10dp = (int) (10 * scale + 0.5f);
+		int padding_20dp = (int) (20 * scale + 0.5f);
+
+		// add view for added treasures
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		layoutParams.setMargins(0, 0, 5, 10);
+
+		Space space = new Space(AddGameActivity2.this);
+		space.setLayoutParams(layoutParams);
+		space.setPaddingRelative(padding_20dp, padding_10dp, padding_10dp, padding_10dp);
+
+		// Create LinearLayout HORIZONTAL
+		LinearLayout ll1 = new LinearLayout(AddGameActivity2.this);
+		ll1.setOrientation(LinearLayout.HORIZONTAL);
+		ll1.setLayoutParams(layoutParams);
+
+		// Latitude
+		TextView latitudeTV = new TextView(AddGameActivity2.this);
+		latitudeTV.setText("Latitude");
+		latitudeTV.setTypeface(null, Typeface.BOLD);
+		latitudeTV.setTextColor(Color.parseColor("#FFFFCC"));
+
+		TextView textView = new TextView(AddGameActivity2.this);
+		textView.setText("    ");
+		
+		EditText latitudeET = new EditText(AddGameActivity2.this);
+		latitudeET.setText(new DecimalFormat("##.#####").format(Double.parseDouble(latitude)));
+		latitudeET.setEnabled(false);
+		latitudeET.setTextColor(Color.parseColor("#FFFFCC"));
+		
+		ll1.addView(latitudeTV);
+		ll1.addView(textView);
+		ll1.addView(latitudeET);
+
+		space = new Space(AddGameActivity2.this);
+		space.setLayoutParams(layoutParams);
+		space.setPaddingRelative(padding_20dp, padding_10dp, padding_10dp, padding_10dp);
+
+		// Create LinearLayout HORIZONTAL
+		LinearLayout ll2 = new LinearLayout(AddGameActivity2.this);
+		ll2.setOrientation(LinearLayout.HORIZONTAL);
+		ll2.setLayoutParams(layoutParams);
+
+		// Longitude
+		TextView longitudeTV = new TextView(AddGameActivity2.this);
+		longitudeTV.setText("Longitude");
+		longitudeTV.setTypeface(null, Typeface.BOLD);
+		longitudeTV.setTextColor(Color.parseColor("#FFFFCC"));
+
+		EditText longitudeET = new EditText(AddGameActivity2.this);
+		longitudeET.setText(new DecimalFormat("##.#####").format(Double.valueOf(longitude)));
+		longitudeET.setEnabled(false);
+		longitudeET.setTextColor(Color.parseColor("#FFFFCC"));
+
+		ll2.addView(longitudeTV);
+		ll2.addView(longitudeET);
+
+		space = new Space(AddGameActivity2.this);
+		space.setLayoutParams(layoutParams);
+		space.setPaddingRelative(padding_20dp, padding_10dp, padding_10dp, padding_10dp);
+
+		// Hint
+		TextView hintTV = new TextView(AddGameActivity2.this);
+		hintTV.setText("Hint");
+		hintTV.setTypeface(null, Typeface.BOLD);
+		hintTV.setTextColor(Color.parseColor("#FFFFCC"));
+
+		EditText hintET = new EditText(AddGameActivity2.this);
+		hintET.setText(hint);
+		hintET.setEnabled(false);
+		hintET.setTextColor(Color.parseColor("#FFFFCC"));
+
+		ll.addView(ll1);
+		ll.addView(ll2);
+		ll.addView(hintTV);
+		ll.addView(hintET);
+	}
+	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -49,73 +131,7 @@ public class AddGameActivity2 extends ActionBarActivity {
 				treasure_url = data.getStringExtra(GO_BACK_TREASURE_URL);
 				hint = data.getStringExtra(GO_BACK_HINT);
 
-				final float scale = getResources().getDisplayMetrics().density;
-				int padding_10dp = (int) (10 * scale + 0.5f);
-				int padding_20dp = (int) (20 * scale + 0.5f);
-
-				// add view for added treasures
-				LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-				layoutParams.setMargins(0, 0, 5, 10);
-
-				Space space = new Space(AddGameActivity2.this);
-				space.setLayoutParams(layoutParams);
-				space.setPaddingRelative(padding_20dp, padding_10dp, padding_10dp, padding_10dp);
-
-				// Create LinearLayout HORIZONTAL
-				LinearLayout ll1 = new LinearLayout(AddGameActivity2.this);
-				ll1.setOrientation(LinearLayout.HORIZONTAL);
-				ll1.setLayoutParams(layoutParams);
-
-				// Latitude
-				TextView latitudeTV = new TextView(AddGameActivity2.this);
-				latitudeTV.setText("Latitude");
-				latitudeTV.setTypeface(null, Typeface.BOLD);
-
-				EditText latitudeET = new EditText(AddGameActivity2.this);
-				latitudeET.setText(new DecimalFormat("##.#####").format(latitude));
-				latitudeET.setEnabled(false);
-
-				ll1.addView(latitudeTV);
-				ll1.addView(latitudeET);
-
-				space = new Space(AddGameActivity2.this);
-				space.setLayoutParams(layoutParams);
-				space.setPaddingRelative(padding_20dp, padding_10dp, padding_10dp, padding_10dp);
-
-				// Create LinearLayout HORIZONTAL
-				LinearLayout ll2 = new LinearLayout(AddGameActivity2.this);
-				ll2.setOrientation(LinearLayout.HORIZONTAL);
-				ll2.setLayoutParams(layoutParams);
-
-				// Longitude
-				TextView longitudeTV = new TextView(AddGameActivity2.this);
-				longitudeTV.setText("Longitude");
-				longitudeTV.setTypeface(null, Typeface.BOLD);
-
-				EditText longitudeET = new EditText(AddGameActivity2.this);
-				longitudeET.setText(new DecimalFormat("##.#####").format(longitude));
-				longitudeET.setEnabled(false);
-
-				ll2.addView(longitudeTV);
-				ll2.addView(longitudeET);
-
-				space = new Space(AddGameActivity2.this);
-				space.setLayoutParams(layoutParams);
-				space.setPaddingRelative(padding_20dp, padding_10dp, padding_10dp, padding_10dp);
-
-				// Hint
-				TextView hintTV = new TextView(AddGameActivity2.this);
-				hintTV.setText("Hint");
-				hintTV.setTypeface(null, Typeface.BOLD);
-
-				EditText hintET = new EditText(AddGameActivity2.this);
-				hintET.setText(hint);
-				hintET.setEnabled(false);
-
-				ll.addView(ll1);
-				ll.addView(ll2);
-				ll.addView(hintTV);
-				ll.addView(hintET);
+				createDesign();
 			}
 			break;
 		}

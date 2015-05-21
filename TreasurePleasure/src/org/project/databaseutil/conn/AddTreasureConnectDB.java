@@ -16,23 +16,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
 public class AddTreasureConnectDB extends AsyncTask<String, Void, String> {
-	private Activity activity;
-	private Context context;
-
-	public AddTreasureConnectDB(Activity activity, Context context) {
-		this.activity = activity;
-		this.context = context;
-	}
 	
 	@Override
 	protected String doInBackground(String... params) {
-		String result = "";
 		String url = SERVER_URL + "addTreasure.php";
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpResponse httpResponse;
@@ -63,47 +53,6 @@ public class AddTreasureConnectDB extends AsyncTask<String, Void, String> {
 				}
 
 				is.close();
-				result = sb.toString();
-
-				if (result.startsWith("success")) {
-					activity.runOnUiThread(new Runnable() {
-
-						@Override
-						public void run() {
-
-//							progressMessage.dismiss();
-
-//							new AlertDialog.Builder(context).setTitle("Add Treasure").setMessage("Treasure added successfully!").setCancelable(false)
-//									.setPositiveButton("OK", new OnClickListener() {
-//										@Override
-//										public void onClick(DialogInterface dialog, int which) {
-//											dialog.dismiss();
-//										}
-//									}).create().show();
-
-						}
-					});
-				} else {
-					activity.runOnUiThread(new Runnable() {
-
-						@Override
-						public void run() {
-
-//							progressMessage.dismiss();
-
-//							new AlertDialog.Builder(context)
-//								.setTitle("Add Treasure")
-//								.setMessage("Failed adding new treasure. Please try once again").setCancelable(false)
-//								.setPositiveButton("OK", new OnClickListener() {
-//									@Override
-//									public void onClick(DialogInterface dialog, int which) {
-//										dialog.dismiss();
-//									}
-//								}).create().show();
-
-						}
-					});
-				}
 			} else {
 				Log.e("POST:", "HTTP RESPONSE IS NULL");
 			}
@@ -112,6 +61,6 @@ public class AddTreasureConnectDB extends AsyncTask<String, Void, String> {
 			Log.e("ERROR:", e.getMessage());
 		}
 
-		return "SOLO";
+		return "YOLO";
 	}
 }

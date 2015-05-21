@@ -18,7 +18,8 @@
         android:layout_below="@+id/addGame"
         android:fontFamily="sans-serif-medium"
         android:onClick="joinGame"
-        android:text="Join Game" />
+        android:text="Join Game" 
+        />
 
     <Button
         android:id="@+id/addGame"

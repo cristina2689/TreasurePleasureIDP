@@ -48,7 +48,6 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 @SuppressWarnings("deprecation")
 public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback, OnMapClickListener, LocationListener {
@@ -102,6 +101,16 @@ public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback
 			map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		}
 
+		// ////
+		latitude = testLocation.getLatitude();
+		longitude = testLocation.getLongitude();
+
+		EditText latitudeText = (EditText) findViewById(R.id.latitudeEditText);
+		EditText longitudeText = (EditText) findViewById(R.id.longitudeEditText);
+
+		latitudeText.setText("" + new DecimalFormat("##.#####").format(latitude));
+		longitudeText.setText("" + new DecimalFormat("##.#####").format(longitude));
+
 	}
 
 	public void addTreasure(View view) {
@@ -109,7 +118,7 @@ public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback
 		String treasure_url = Constants.SERVER_URL + Constants.game_title + "_" + Constants.game_id + "/" + selectedImagePath.substring(selectedImagePath.lastIndexOf('/') + 1);
 
 		// add in DB
-		new AddTreasureConnectDB(this, AddTreasure.this).execute(String.valueOf(latitude), String.valueOf(longitude), treasure_url, String.valueOf(game_id), hint);
+		new AddTreasureConnectDB().execute(String.valueOf(latitude), String.valueOf(longitude), treasure_url, String.valueOf(game_id), hint);
 
 		// send back info
 		Intent resultIntent = new Intent();
@@ -211,41 +220,32 @@ public class AddTreasure extends ActionBarActivity implements OnMapReadyCallback
 
 	@Override
 	public void onMapClick(LatLng coord) {
-		if (marker != null) {
-			marker.remove();
-		}
-		marker = map.addMarker(new MarkerOptions().position(coord).draggable(true));
-		
-		latitude = coord.latitude;
-		longitude = coord.longitude;
-		
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		latitude = location.getLatitude();
+		longitude = location.getLongitude();
+
 		EditText latitudeText = (EditText) findViewById(R.id.latitudeEditText);
 		EditText longitudeText = (EditText) findViewById(R.id.longitudeEditText);
-		
+
 		latitudeText.setText("" + new DecimalFormat("##.#####").format(latitude));
 		longitudeText.setText("" + new DecimalFormat("##.#####").format(longitude));
 	}
 
 	@Override
-	public void onLocationChanged(Location location) {
-
-	}
-
-	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onProviderEnabled(String provider) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
 
 	}
 

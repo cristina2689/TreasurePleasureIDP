@@ -21,9 +21,7 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLUtils;
 import android.util.Log;
 
-import com.google.android.gms.maps.model.LatLng;
-
-class Cube {
+public class Cube {
 	private Context context;
 	private boolean threadStarted;
 	/** The buffer holding the vertices */
@@ -34,6 +32,7 @@ class Cube {
 	private ByteBuffer indexBuffer;
 	/** Our texture pointer */
 	private int[] textures = new int[1];
+	
 	/**
 	 * The initial vertex definition
 	 *
@@ -172,32 +171,11 @@ class Cube {
 	public void loadGLTexture(GL10 gl, Context context) throws MalformedURLException {
 		Log.d("debug", "se apeleaza");
 		// Get the texture from the Android resource directory
-		
-//		URL url = new URL("http://simurg.site40.net/treasure_pleasure/salut_119/Fotografie0761.jpg");
-//		Bitmap bmp = null;
-//		try {
-//			bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		//imageView.setImageBitmap(bmp);
-//		
-//		ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
-//		bmp.compress(CompressFormat.PNG, 0 /*ignored for PNG*/, bos); 
-//		byte[] bitmapdata = bos.toByteArray();
-//		ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
-//		
-//		InputStream inputStream = bs;
-		
-//		InputStream is = context.getResources()
-//				.openRawResource(R.drawable.ic_menu_myplaces);
 		File file = new File(CameraActivity.fileLocation);
 		InputStream is = null;
 		try {
 			is = new FileInputStream(file);
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
