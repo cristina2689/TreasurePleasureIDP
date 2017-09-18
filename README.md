@@ -7,3 +7,5 @@ Mentor: Vlad Dragoi
 Roles Assigned:
    * worker Cristina Georgiana Opriceana
    * driver Cristina- Ioana Brinza
+
+Yolo!
